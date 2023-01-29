@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    Hola {{ user.username }}! Bienvenido!
+    <p><a href="{% url 'logout' %}"> Salir</a></p>
+{% else %}
+<p>Usted no ha iniciado sesión aún.</p>
+<a href="{% url 'login' %}">Iniciar Sesión</a> |
+<a href="{% url 'signup' %}">Registrarse</a>
+{% endif %}
+{% endblock content %}
