@@ -9,9 +9,3 @@ google.com
 trustytcode@gmail.com
 trustytcode123
 """
-
-""" 
-django
-admin
-admin 
-"""
