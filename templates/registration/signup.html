@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
+{% load socialaccount %}
 {% block title %} Registro {% endblock title %}
 
 {% block content %}
+
+<a href="{% provider_login_url 'google' %}?next=/" 
+class="btn btn-success" role="button">
+<img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+ Registrarse con Google</a>
+
+ <a href="#" 
+ class="btn btn-success" role="button">
+ <img class="github-icon" width="25" height="24" src="https://play-lh.googleusercontent.com/PCpXdqvUWfCW1mXhH1Y_98yBpgsWxuTSTofy3NGMo9yBTATDyzVkqU580bfSln50bFU=w240-h480-rw"/>
+  Registrarse con Github</a>
+
+<br><br>
+
 <h2>Registrarse</h2>
 <form method="post"> {% csrf_token %}
     {{ form|crispy }}

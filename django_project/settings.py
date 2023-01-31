@@ -17,6 +17,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+SITE_ID = 2
 # Application definition
 
 INSTALLED_APPS = [
@@ -31,7 +32,29 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "trust_app.apps.TrustAppConfig",
     "captcha",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
 ]
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+AUTHENTICATION_BACKENDS = ["allauth.account.auth_backends.AuthenticationBackend"]
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    }
+}
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
