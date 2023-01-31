@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "accounts.apps.AccountsConfig",
     "trust_app.apps.TrustAppConfig",
+    "captcha",
 ]
 
 MIDDLEWARE = [
@@ -112,6 +113,11 @@ STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+RECAPTCHA_PUBLIC_KEY = site
+RECAPTCHA_PRIVATE_KEY = key_site
+SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

@@ -1,5 +1,11 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    UserChangeForm,
+    AuthenticationForm,
+)
 from accounts.models import CustomUser
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -12,6 +18,8 @@ class CustomUserCreationForm(UserCreationForm):
             "telefono",
         )
 
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
@@ -22,3 +30,8 @@ class CustomUserChangeForm(UserChangeForm):
             "edad",
             "telefono",
         )
+
+
+class UserLoginForm(AuthenticationForm):
+
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
