@@ -16,6 +16,7 @@ class CustomUserCreationForm(UserCreationForm):
             "email",
             "edad",
             "telefono",
+            "pais",
         )
 
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
@@ -29,6 +30,7 @@ class CustomUserChangeForm(UserChangeForm):
             "email",
             "edad",
             "telefono",
+            "pais",
         )
 
 
