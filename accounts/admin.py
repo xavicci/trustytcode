@@ -12,6 +12,7 @@ class CustomUserAdmin(UserAdmin):
         "email",
         "username",
         "edad",
+        "pais",
         "telefono",
         "is_staff",
     ]
@@ -21,6 +22,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "edad",
+                    "pais",
                     "telefono",
                 )
             },
@@ -32,6 +34,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "edad",
+                    "pais",
                     "telefono",
                 )
             },
