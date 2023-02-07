@@ -1,6 +1,6 @@
 from django.db import models
 from django_countries.fields import CountryField
-from django.contrib.auth.models import User
+from django_project.settings import AUTH_USER_MODEL
 
 
 class Category(models.Model):
@@ -39,9 +39,9 @@ class Company(models.Model):
     def _str_(self):
         return self.name
 
-class Review(models.Models):
+class Review(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="company_reviews")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     text = models.TextField(max_length=254, null=True, blank=True, verbose_name="Comentario")
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     approved_review = models.BooleanField(default=False)
