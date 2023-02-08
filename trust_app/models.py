@@ -43,6 +43,8 @@ class Review(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="company_reviews")
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     text = models.TextField(max_length=254, null=True, blank=True, verbose_name="Comentario")
+    RATING_CHOICES = [(i, "{} stars".format(i)) for i in range(1, 6)]
+    rate = models.IntegerField(choices=RATING_CHOICES)
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     approved_review = models.BooleanField(default=False)
 
