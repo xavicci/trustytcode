@@ -11,4 +11,9 @@
 <a href="{% url 'login' %}">Iniciar Sesión</a> |
 <a href="{% url 'signup' %}">Registrarse</a>
 {% endif %}
+
+{% if user.is_authenticated %}
+    <h3 class="bg-light"><a href="{% url 'create_company' %}">Crear Empresa</a></h3>
+    <br><br>
+{% endif %}
 {% endblock content %}

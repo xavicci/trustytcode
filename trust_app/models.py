@@ -13,15 +13,15 @@ class Category(models.Model):
         verbose_name_plural = "Categorias"
         ordering = ["name"]
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 class Company(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False, verbose_name="Nombre")
     website = models.CharField(max_length=50,null=False, blank=False, verbose_name="Sitio Web")
-    phone = models.CharField(max_length=15,null=False, blank=False, verbose_name="Sitio Web")
-    country = CountryField()
-    logo = models.ImageField(upload_to='trust_app/logos', max_length=100)
+    phone = models.CharField(max_length=15,null=False, blank=False, verbose_name="Teléfono")
+    country = CountryField(verbose_name="País")
+    logo = models.ImageField(upload_to='logos/')
     category = models.ManyToManyField(Category, related_name="get_categories", verbose_name="Categoría")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
@@ -36,7 +36,7 @@ class Company(models.Model):
         self.approved_company = True
         self.save()
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 class Review(models.Model):
