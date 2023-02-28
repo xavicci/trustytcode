@@ -1,7 +1,9 @@
-from django.views.generic import DetailView, ListView, UpdateView, DeleteView
+from django.views.generic import DetailView, ListView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import CreateView
-from .forms import CompanyForm
+from django.views.generic.detail import SingleObjectMixin
+from django.views import View
+from .forms import CompanyForm, ReviewForm
 from django.urls import reverse_lazy, reverse
 from .models import Company
 from django.conf import settings
@@ -52,6 +54,49 @@ class CompanyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return user == "admin"
 
 
-class CompanyReviewDetailView(LoginRequiredMixin, DetailView):
+# class CompanyReviewDetailView(LoginRequiredMixin, DetailView):
+#     model = Company
+#     template_name = "review_company.html"
+#     context_object_name = "company"
+
+
+class CompanyReviewDetailView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        view = ReviewGet.as_view()
+        return view(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        view = ReviewPost.as_view()
+        return view(request, *args, **kwargs)
+
+
+class ReviewGet(DetailView):
+
     model = Company
     template_name = "review_company.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = ReviewForm()
+        return context
+
+
+class ReviewPost(SingleObjectMixin, FormView):
+
+    model = Company
+    form_class = ReviewForm
+    template_name = "review_company.html"
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        review = form.save(commit=False)
+        review.company = self.object
+        review.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        company = self.get_object()
+        return reverse("review_company", kwargs={"pk": company.pk})

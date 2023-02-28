@@ -1,5 +1,7 @@
 from django import forms
-from trust_app.models import Company, Category
+from trust_app.models import Company, Category, Review
+import requests
+
 
 class CompanyForm(forms.ModelForm):
     class Meta:
@@ -12,7 +14,14 @@ class CompanyForm(forms.ModelForm):
             "country",
             "category",
         )
+
     category = forms.ModelMultipleChoiceField(
         queryset=Category.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ("rate", "user", "text")

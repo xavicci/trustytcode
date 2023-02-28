@@ -25,27 +25,21 @@
                 </a>
               
             </div>
-
-            <div class="text-end">
-                <a href="{% url 'company_edit' company.pk %}" class="btn btn-outline-primary me-2">Edit</a>
-                <a href="{% url 'company_delete' company.pk %}" class="btn btn-primary">Delete</a>
-              </div>
-
+               <p><br></p>
               <hr>
-              <h4> Comments</h4>
+              <h4> Reviews </h4>
               
-              {% for reviews in company.review_set.all %}
-                      <p> {{reviews.user}} &middot; {{text}} </p>
+              {% for review in company.company_reviews.all %}
+                      <p> {{review.user}} &middot; Review: {{ review.text }} &middot; Start: {{ review.rate }} &middot; Time: {{ review.created_date }}   </p>
               {% endfor %}
-              <hr> 
               
-              <h4>Add a comment</h4>
+              <hr> 
+
+              <h4>Add a review</h4>
               <form action="" method="post">{% csrf_token %}
                   {{form|crispy}}
                   <button class='btn btn-success ml-2' type='submit'>Save</button>
               </form>
 
     </div>
-
-
 {% endblock %}
