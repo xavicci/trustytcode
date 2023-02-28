@@ -1,19 +1,49 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %} Home {% endblock title %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
     Hola {{ user.username }}! Bienvenido!
-    <p><a href="{% url 'logout' %}"> Salir</a></p>
+
+    <p><br></p>
+    
 {% else %}
 <p>Usted no ha iniciado sesión aún.</p>
 <a href="{% url 'login' %}">Iniciar Sesión</a> |
 <a href="{% url 'signup' %}">Registrarse</a>
+<p><br></p>
 {% endif %}
 
+<div class="container px-4 px-lg-5 border">
+    <br>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for company in company_list %}
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img src="{{ company.logo.url }}" class="card-img-top" alt="..." >
+          <div class="card-body">
+            {{ company.name }}
+            <p class="card-text">{{ company.website }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-grid gap-2 d-md-block">
+                <a href="{% url 'company_detail' company.pk %}" class="btn btn-primary" role="button" >View</a>
+                <a href="{% url 'company_detail' company.pk %}" class="btn btn-primary" role="button" >Review</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}  
+    </div>
+    <br>
+</div>
+
 {% if user.is_authenticated %}
-    <h3 class="bg-light"><a href="{% url 'create_company' %}">Crear Empresa</a></h3>
-    <br><br>
+    <p><br></p>
+    <p><a href="{% url 'logout' %}"> Cerrar Sesión</a></p>
 {% endif %}
+
 {% endblock content %}

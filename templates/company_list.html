@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container px-4 px-lg-5 border">
+        <br>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for company in company_list %}
+
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="{{ company.logo.url }}" class="card-img-top" alt="..." >
+              <div class="card-body">
+                <p class="card-text">{{ company.website }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Review</button>
+                  </div>
+      
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}  
+        </div>
+        <br>
+
+</div>
+
+{% endblock content %}
