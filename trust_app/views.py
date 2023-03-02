@@ -8,6 +8,7 @@ from django.urls import reverse_lazy, reverse
 from .models import Company, Category
 from django.conf import settings
 from django.db.models import Avg
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 class HomePageView(ListView):
@@ -113,3 +114,22 @@ class ReviewPost(SingleObjectMixin, FormView):
     def get_success_url(self):
         company = self.get_object()
         return reverse("review_company", kwargs={"pk": company.pk})
+
+
+class CompanyCategoryView(ListView):
+    model = Company
+    template_name = "company_list.html"
+    context_object_name = "company_list"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category = get_object_or_404(Category, pk=self.kwargs.get('pk'))
+        context['category'] = category
+        return context
+
+    def get_queryset(self):
+        category_pk = self.kwargs.get('pk')
+        queryset = super().get_queryset().filter(category__pk=category_pk)
+        queryset = queryset.annotate(avg_rating=Avg('company_reviews__rate')).order_by('-avg_rating')
+
+        return queryset
