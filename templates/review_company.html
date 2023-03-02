@@ -27,19 +27,33 @@
             </div>
                <p><br></p>
               <hr>
-              <h4> Reviews </h4>
+              <h1> Reseñas </h1>
               
               {% for review in company.company_reviews.all %}
-                      <p> {{review.user}} &middot; Review: {{ review.text }} &middot; Start: {{ review.rate }} &middot; Time: {{ review.created_date }}   </p>
+                      <h3>{{review.user}}</h3>
+                      <p>{{ review.created_date }} </p>
+                      <h4>Trustyt Score: {{ review.rate }}</h4>
+                      <p>
+                        {{ review.text }}
+                      </p>
+                      <hr>
+
               {% endfor %}
               
               <hr> 
-
+              {% if user.is_authenticated %}        
               <h4>Add a review</h4>
               <form action="" method="post">{% csrf_token %}
                   {{form|crispy}}
                   <button class='btn btn-success ml-2' type='submit'>Save</button>
               </form>
+             {% else %}
+             <h4>Inicia sesión para dejar un una reseña</h4>
+    
+             <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Iniciar Sesion</a>
+            {% endif%}
+
+             
 
     </div>
 {% endblock %}

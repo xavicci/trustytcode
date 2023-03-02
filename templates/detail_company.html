@@ -32,6 +32,15 @@
               </div>
 
         </div>
+        
+        {% for review in company.review.all %}
+        <div class="comment">
+            <div class="date">{{ review.created_date }}</div>
+            <strong>{{ review.rate }}</strong>
+            <strong>{{ review.user }}</strong>
+            <p>{{ review.text }}</p>
+        </div>
+        {% endfor %}
 
 
 {% endblock %}

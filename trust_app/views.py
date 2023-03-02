@@ -24,7 +24,7 @@ class CreateCompany(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class CompanyDetail(LoginRequiredMixin, DetailView):
+class CompanyDetail(DetailView):
     model = Company
     template_name = "detail_company.html"
     context_object_name = "company"
@@ -60,7 +60,7 @@ class CompanyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 #     context_object_name = "company"
 
 
-class CompanyReviewDetailView(LoginRequiredMixin, View):
+class CompanyReviewDetailView(View):
     def get(self, request, *args, **kwargs):
         view = ReviewGet.as_view()
         return view(request, *args, **kwargs)
