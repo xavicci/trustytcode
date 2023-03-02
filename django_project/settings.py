@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "accounts.apps.AccountsConfig",
-    "trust_app.apps.TrustAppConfig",
     "captcha",
     "django.contrib.sites",
     "allauth",
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "django_countries",
+    "trust_app",
 ]
 
 SOCIALACCOUNT_LOGIN_ON_GET = True

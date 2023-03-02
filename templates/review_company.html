@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load review_tags %}
 {% block content %}
     <div class="container px-4 px-lg-5 border">
         <div class="row my-5 d-flex justify-content-center">
@@ -8,6 +9,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                 <h2>{{ company.name }}</h2>
+                <h4>Trustyt Score: {{ company|average_review_rate }} </h4>
 
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-2">

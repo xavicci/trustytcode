@@ -36,10 +36,14 @@ class Company(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
     approved_company = models.BooleanField(default=False)
 
+    def average_rating(self):
+        return self.company_reviews.aggregate(Avg('rate'))['rate__avg']
+        
+
     class Meta:
         verbose_name = "Empresa"
         verbose_name_plural = "Empresas"
-
+        
     def approve(self):
         self.approved_company = True
         self.save()

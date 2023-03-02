@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load review_tags %}
 
 {% block title %} Home {% endblock title %}
 
@@ -26,6 +27,8 @@
           <img src="{{ company.logo.url }}" class="card-img-top" alt="..." >
           <div class="card-body">
             {{ company.name }}
+            <p>TS: {{ company|average_review_rate }}</p>
+
             <p class="card-text">{{ company.website }}</p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-grid gap-2 d-md-block">
