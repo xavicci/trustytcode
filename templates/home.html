@@ -44,9 +44,22 @@
     <br>
 </div>
 
-{% if user.is_authenticated %}
-    <p><br></p>
-    <p><a href="{% url 'logout' %}"> Cerrar Sesión</a></p>
-{% endif %}
+<div class="container px-4 px-lg-5 my-3 py-3">
+  <h2>Explora por categorías</h2>
+  <div class="row justify-content-center">
+
+
+{% for category in categories %}
+<div class="col-12 col-md-6 col-lg-4 my-3">
+    <div class="card table-hover">
+      <div class="card-body">
+        <a href="">{{ category }}</a>
+      </div>
+    </div>
+</div>
+
+{% endfor %}
+  </div>
+</div>
 
 {% endblock content %}

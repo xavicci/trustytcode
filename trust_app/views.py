@@ -5,7 +5,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views import View
 from .forms import CompanyForm, ReviewForm
 from django.urls import reverse_lazy, reverse
-from .models import Company
+from .models import Company, Category
 from django.conf import settings
 from django.db.models import Avg
 
@@ -17,6 +17,13 @@ class HomePageView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset().annotate(avg_rating=Avg('company_reviews__rate'))
         return queryset.filter(approved_company=True).order_by('-avg_rating')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+    
+    
 
 
 
