@@ -1,6 +1,7 @@
 from django.db import models
 from django_countries.fields import CountryField
 from django_project.settings import AUTH_USER_MODEL
+from django.db.models import Avg
 
 
 class Category(models.Model):
@@ -36,9 +37,6 @@ class Company(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
     approved_company = models.BooleanField(default=False)
 
-    def average_rating(self):
-        return self.company_reviews.aggregate(Avg('rate'))['rate__avg']
-        
 
     class Meta:
         verbose_name = "Empresa"

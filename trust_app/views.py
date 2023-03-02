@@ -7,11 +7,17 @@ from .forms import CompanyForm, ReviewForm
 from django.urls import reverse_lazy, reverse
 from .models import Company
 from django.conf import settings
+from django.db.models import Avg
 
 # Create your views here.
 class HomePageView(ListView):
     model = Company
     template_name = "home.html"
+
+    def get_queryset(self):
+        queryset = super().get_queryset().annotate(avg_rating=Avg('company_reviews__rate'))
+        return queryset.filter(approved_company=True).order_by('-avg_rating')
+
 
 
 class CreateCompany(LoginRequiredMixin, CreateView):
