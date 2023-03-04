@@ -37,6 +37,9 @@ class Company(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
     approved_company = models.BooleanField(default=False)
 
+    def reviews_count(self):
+        return self.company_reviews.count()
+
 
     class Meta:
         verbose_name = "Empresa"
