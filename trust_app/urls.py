@@ -19,4 +19,5 @@ urlpatterns = [
         "company/<int:pk>/delete/", CompanyDeleteView.as_view(), name="company_delete"
     ),
     path('category/<int:pk>/', CompanyCategoryView.as_view(), name='company_category'),
+    
 ]
