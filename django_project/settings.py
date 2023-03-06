@@ -1,6 +1,8 @@
 from pathlib import Path
-from settings_server import *
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,7 +17,7 @@ SECRET_KEY = "django-insecure-ha*w4sf20-1=f7#s=@&%q10*iwx_k2p8gsoj8cg&fj!xhcyd0(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'trustytcode-production.up.railway.app', '127.0.0.1']
 
 
 SITE_ID = 2
@@ -148,8 +150,8 @@ STATICFILES_DIRS = (
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-RECAPTCHA_PUBLIC_KEY = site
-RECAPTCHA_PRIVATE_KEY = key_site
+RECAPTCHA_PUBLIC_KEY = os.environ.get('site')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('key_site')
 SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
 
@@ -165,8 +167,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 # enviar correo con google
-EMAIL_HOST = Server
-EMAIL_HOST_USER = email
-EMAIL_HOST_PASSWORD = Password_txt
-EMAIL_PORT = Port
+EMAIL_HOST = os.environ.get('Server')
+EMAIL_HOST_USER = os.environ.get('email')
+EMAIL_HOST_PASSWORD = os.environ.get('Password_txt')
+EMAIL_PORT = os.environ.get('Port')
 EMAIL_USE_TLS = True
