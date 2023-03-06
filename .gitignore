@@ -3,3 +3,4 @@ settings_server.py
 env
 __pycache__
 .env
+venv
