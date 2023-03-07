@@ -20,10 +20,10 @@
 
 <div class="container px-4 px-lg-5 border">
     <br>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 justify-content-center g-3">
     {% for company in company_list %}
-      <div class="col">
-        <div class="card" style="width: 18rem;">
+      <div class="col my-4">
+        <div class="card shadow" style="width: 18rem;">
           <img src="{{ company.logo.url }}" class="card-img-top" alt="..." >
           <div class="card-body">
             {{ company.name }}
@@ -53,7 +53,7 @@
 
 {% for category in categories %}
 <div class="col-12 col-md-6 col-lg-4 my-3">
-    <div class="card">
+    <div class="card shadow">
       <div class="card-body">
         <a href="{% url 'company_category' category.pk %}">{{ category }}</a>
       </div>
