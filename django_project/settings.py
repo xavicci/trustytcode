@@ -173,4 +173,4 @@ EMAIL_HOST_PASSWORD = os.environ.get('Password_txt')
 EMAIL_PORT = os.environ.get('Port')
 EMAIL_USE_TLS = True
 
-CSRF_TRUSTED_ORIGINS = ['https://railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://trustytcode-production.up.railway.app/']
